@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web_server:
+    image: alpine:latest
+    container_name: production_frontend
+    command: sh -c "echo 'Frontend running...' && sleep infinity"
+    ports:
+      - "80:80"
+
+  database:
+    image: alpine:latest
+    container_name: production_database
+    command: sh -c "echo 'Database online...' && sleep infinity"
+    volumes:
+      - data_store:/var/lib/data
+
+volumes:
+  data_store:

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Mobile Server</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; background: #222; color: #fff; padding-top: 50px; }
+        h1 { color: #00ffcc; }
+        .status { background: #333; padding: 20px; display: inline-block; border-radius: 8px; border: 1px solid #444; width: 300px; }
+        .live-data { color: #ffcc00; font-size: 1.2em; font-weight: bold; margin-top: 15px; border-top: 1px solid #555; padding-top: 10px;}
+    </style>
+</head>
+<body>
+    <h1>🚀 DevOps Connected Project</h1>
+    <div class="status">
+        <p><strong>Status:</strong> Online & Networked</p>
+        <p><strong>Environment:</strong> Unrooted Multi-Tier Stack</p>
+        
+        <!-- This is where our API data will be injected dynamically -->
+        <div class="live-data">
+            Active Users: <span id="user-count">Loading API Data...</span>
+        </div>
+    </div>
+
+    <script>
+        // Tell the browser to fetch data from our backend microservice port
+        fetch('http://localhost:9090/api/v1/status')
+            .then(response => response.json())
+            .then(data => {
+                // Inject the live data directly into our HTML page element
+                document.getElementById('user-count').innerText = data.active_users + " (Live from API)";
+            })
+            .catch(error => {
+                document.getElementById('user-count').innerText = "API Offline Error";
+                console.error('Error fetching API:', error);
+            });
+    </script>
+</body>
+</html>
