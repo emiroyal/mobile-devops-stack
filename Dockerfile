@@ -1,5 +1,11 @@
-FROM alpine:latest
-RUN apk update && apk add bash python3
-WORKDIR /root/my-web-project
-COPY . .
-CMD ["sh", "-c", "python3 backend_api.py & python3 -m http.server 8080"]
+FROM python:3.12-alpine
+
+WORKDIR /app
+COPY backend_api.py database.json./
+
+# Best practice: non-root user
+RUN adduser -D appuser && chown -R appuser /app
+USER appuser
+
+EXPOSE 9090
+CMD ["python3", "backend_api.py"]
