@@ -8,4 +8,4 @@ jobs:
       - name: Build Docker image
         run: docker build -t mobile-stack.
       - name: Success
-        run: echo "✅ Build passed - Phone code works in cloud!"
+        run: echo "Build passed!"
